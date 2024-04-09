@@ -529,3 +529,6 @@ Connection: close
   "error": "Invalid trade ID"
 }
 ```
+Finalizing this demo I created and tested a collection and some validation in Postman
+> [POSTMAN](https://github.com/testoml/ApiTrading/tree/main/postman)
+  
