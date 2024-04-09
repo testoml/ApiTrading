@@ -1,0 +1,399 @@
+{
+	"info": {
+		"_postman_id": "c0f9e2cd-a510-4c41-b2db-71cc949b99e8",
+		"name": "Trades  Demo API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4602723"
+	},
+	"item": [
+		{
+			"name": "CREATE - Error",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"let current = new Date();\r",
+							"let cDate = current.getFullYear() + '-' + (current.getMonth() + 1) + '-' + current.getDate();\r",
+							"let cTime = current.getHours() + \":\" + current.getMinutes() + \":\" + current.getSeconds();\r",
+							"let dateTime = cDate + ' ' + cTime;\r",
+							"pm.environment.set('date', dateTime);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Validate Errors\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.errors[0]).to.eql(\"Date has not the correct format\");\r",
+							"    pm.expect(jsonData.errors[1]).to.eql(\"Amount must be a number\");\r",
+							"    pm.expect(jsonData.errors[2]).to.eql(\"Win must be a boolean\");\r",
+							"    pm.expect(jsonData.errors[3]).to.eql(\"Payaout must be a number\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"date\": \"08-Apr-2024\",\r\n    \"amount\": \"Hola\" , \r\n    \"payaout\": \"Hola\",\r\n    \"profit\": \"Hola\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}",
+					"host": [
+						"{{baseURL}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CREATE",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"\r",
+							"const moment = require('moment');\r",
+							"currentDate = moment()\r",
+							"pm.environment.set('date', currentDate.format(\"DD-MMM-YYYY HH:mm:ss\"))"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Variables\r",
+							"var jsonData = pm.response.json();\r",
+							"//Test\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Validate generate new trade\", function () {\r",
+							"    pm.expect(jsonData._id).to.not.eql(0);\r",
+							"    pm.expect(jsonData.__v).to.eql(0);\r",
+							"});\r",
+							"//set id \r",
+							"pm.environment.set('id', jsonData._id);\r",
+							"//set response\r",
+							"pm.environment.set('responseCreate', JSON.stringify(jsonData));"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"date\": \"{{date}}\",\r\n    \"amount\": 4,\r\n    \"win\": true, \r\n    \"payaout\": 0.92,\r\n    \"profit\": 3.68\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}",
+					"host": [
+						"{{baseURL}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET ALL",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Validate exist trade\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.length).to.not.eql(0);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}",
+					"host": [
+						"{{baseURL}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET by ID - Validate id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Validate message error\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.error).to.eql(\"Invalid trade ID\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/asdasd",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"asdasd"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET by ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Validate exist trade\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.length).to.not.eql(0);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/{{id}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Variables\r",
+							"var jsonData = pm.response.json();\r",
+							"//Test\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Validate response\", function () {\r",
+							"    pm.expect(jsonData.modifiedCount).to.eql(1);\r",
+							"    pm.expect(jsonData.matchedCount).to.eql(1);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{{payloadUpdate}}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/{{id}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Validate Update",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//variable\r",
+							"var jsonData = pm.response.json();\r",
+							"//test\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Validate exist trade\", function () {\r",
+							"    pm.expect(jsonData.length).to.not.eql(0);\r",
+							"});\r",
+							"pm.test(\"Validate update success\", function () {\r",
+							"    const payload = JSON.parse(pm.environment.get('payloadUpdate'));\r",
+							"    pm.expect(jsonData).to.contain(payload);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/{{id}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate delete\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.acknowledged).to.be.true;\r",
+							"    pm.expect(jsonData.deletedCount).to.be.eql(1);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/{{id}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Validate Delete",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//variable\r",
+							"var jsonData = pm.response.json();\r",
+							"//test\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const result = function getID(){\r",
+							"    \r",
+							"}\r",
+							"pm.test(\"Validate exist trade id deleted\", function () {\r",
+							"    let id = pm.environment.get('id');\r",
+							"    for(i=0; i> jsonData.length;  i++){\r",
+							"        pm.expect(jsonData[i]._id).to.not.eql(id);    \r",
+							"     }\r",
+							"    \r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}",
+					"host": [
+						"{{baseURL}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

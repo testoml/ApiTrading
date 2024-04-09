@@ -1,0 +1,63 @@
+###
+POST http://localhost:9000/api/trades HTTP/1.1
+Content-Type:  application/json
+
+{
+    "date": "08-Apr-2024 17:01:10",
+    "amount": 4,
+    "win": true, 
+    "payaout": 0.92,
+    "profit": 3.68
+}
+
+###
+POST http://localhost:9000/api/trades HTTP/1.1
+Content-Type:  application/json
+
+{
+    "date": "08-Apr-2024",
+    "amount": "Hola" , 
+    "payaout": "Hola",
+    "profit": "Hola"
+}
+
+
+###
+GET http://localhost:9000/api/trades HTTP/1.1
+Content-Type:  application/json
+
+###
+GET http://localhost:9000/api/trades/661427d636479b2525cd9c10 HTTP/1.1
+Content-Type:  application/json
+
+###
+PUT  http://localhost:9000/api/trades/661427d636479b2525cd9c11 HTTP/1.1
+Content-Type:  application/json
+
+{
+    "date": "07/05/2024",
+    "amount": 3,
+    "win": true, 
+    "payaout": 0.92,
+    "profit": 1.84
+}
+
+### Invalid id
+PUT  http://localhost:9000/api/trades/457   HTTP/1.1
+Content-Type:  application/json
+
+
+###
+PUT  http://localhost:9000/api/trades/661427d636479b2525cd9c11 HTTP/1.1
+Content-Type:  application/json
+
+{
+    "date": "07/05/2024",
+    "amount": 3,
+    "win": true, 
+    "payaout": 0.92,
+    "profit": 1.84
+}
+
+###
+DELETE  http://localhost:9000/api/trades/661427d636479b2525cd9c12 HTTP/1.1

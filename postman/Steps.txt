@@ -1,0 +1,24 @@
+
+Steps import files
+
+1. Open Postman: Launch the Postman application on your computer.
+2. Select Import: In the top left corner of the Postman window, click on the "Import" button. It typically looks like an arrow pointing upwards.
+3. Choose File to Import: In the import window, you'll have options to import different types of files, such as Collections, Environments, Data, ec. 
+   Select the appropriate file type that you want to import. For example, if you want to import a collection, select "Collection".
+4. Browse for the File: Click on the "Choose Files" button and navigate to the location of the file you want to import. Select the file and click "Open".
+5. Review Import Options: Depending on the file type, Postman may present you with options to configure how you want to import the file. For example, when importing a collection, you may have the option to import into an existing collection or create a new one.
+6. Complete the Import: Once you've configured the import options, click the "Import" button to import the file into Postman.
+7. Review Imported Items: After the import process completes, you should see the imported items (collections, environments, etc.) listed in the left sidebar of the Postman window.
+8. Verify and Use: Verify that the imported items are correct and organized as expected. You can now start using them in your requests or workflows within Postman.
+
+Run collection
+1. Open Postman: Launch the Postman application on your computer.
+2. Select Collection: In the left sidebar of the Postman window, click on the "Collections" tab. This will display a list of collections available in your workspace.
+3. Choose Collection: Click on the collection you want to run. This will open the collection details view.
+4. Run Collection: In the collection details view, you'll see a button labeled "Run" or "Run Collection". Click on this button to start the execution of the requests within the collection.
+5. Select Environment (Optional): If your collection requires an environment to run properly (e.g., to use environment variables), Postman will prompt you to select an environment. Choose the appropriate environment from the dropdown menu, or select "No environment" if not needed.
+6. Monitor Execution: Postman will begin executing the requests in the collection one by one. You'll see the progress of the execution in the runner window, including details such as the request being executed, response status, response time, etc.
+7. View Results: Once the execution is complete, you can review the results of each request. Postman will display the response body, headers, and other details for each request in the runner window.
+8. View Collection Run Summary: After all requests have been executed, Postman will provide a summary of the collection run, including the total number of requests executed, the number of successful requests, the number of failed requests, etc.
+9. View Logs (Optional): If you encounter any errors or issues during the execution of the collection, you can review the logs and debug the problem. Postman provides detailed logs for each request execution, which can help diagnose issues.
+10. Rerun Collection (Optional): If needed, you can rerun the collection by clicking the "Rerun" button in the runner window. This allows you to reexecute the requests in the collection without having to manually trigger each request.
