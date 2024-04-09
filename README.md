@@ -1,4 +1,4 @@
-# 🌱 Api Trading Demo using MongoDB
+# 🌱 Api Trade using MongoDB and Node.js
 The primary goal of this project is to help you grasp fundamental concepts and understand how to create various endpoints, as well as how to test a simple CRUD operation, using Node.js and MongoDB.
 ### :book: Prerequisites
 - Node.js
