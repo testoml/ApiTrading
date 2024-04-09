@@ -1,7 +1,7 @@
-# Api Trading Demo using MongoDB
-
-### Prerequisites
-- Installed node.js
+# 🌱 Api Trading Demo using MongoDB
+The primary goal of this project is to help you grasp fundamental concepts and understand how to create various endpoints, as well as how to test a simple CRUD operation, using Node.js and MongoDB.
+### :book: Prerequisites
+- Node.js
 - Installed MondoDB
   - You can use these tutorials to start with MongoDB, for our example with will use localhost, but you can use the free cloud account from MongoDB:
     - [Mongodb installation in windows](https://www.youtube.com/watch?v=gB6WLkSrtJk) 
@@ -10,16 +10,15 @@
     - [Comunity](https://www.mongodb.com/try/download/community)
     - [Shell](https://www.mongodb.com/try/download/shell)
 
-
-       
+##  :rocket: Start 
 - Initialize package.js
  ```sh
 npm init
 ```
-- Please create a new folder with an empty project and I suggest the following structure
- 
+- :file_folder: Please create a new folder with an empty project and I suggest the following structure
+![image](https://github.com/testoml/ApiTrading/blob/main/resource/msya2vgn.25a.png)
    
-- Install dependecies and dev-depencies
+-  Install dependecies and dev-depencies
 #### Dev-dependecies
 Install nodemon
 ```sh
@@ -33,13 +32,13 @@ Some key features of nodemon include:
 - Integration: Nodemon can be easily integrated into your development workflow. You can use it with popular build tools, task runners, and frameworks, such as npm scripts, Gulp, or Grunt, to streamline your development process further.
 - Improved Productivity: By eliminating the need for manual server restarts after code changes, nodemon improves developers' productivity and workflow efficiency. It allows developers to focus on writing and testing code without interruptions caused by server restarts.
 
-> Note: After installation of dev-depencies in package.json set the script to run nodemon
+> Note: After installation of dev-dependencies in package.json set the script to run nodemon
 ```json
  "scripts": {
     "start": "nodemon src/index.js"
   },
 ```
-#### Dependecies
+#### Dependencies
 ```sh
 npm install mongoose express dotenv
 ```
@@ -79,7 +78,7 @@ Run and check the connection working on
 ```dash
 npm run start
 ```
-[image]()
+![image](https://github.com/testoml/ApiTrading/blob/main/resource/jsx1bg0n.lg4.png)
 
 ### Set environment
 - Create a new file called .env in the main path
